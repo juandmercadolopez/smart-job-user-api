@@ -1,6 +1,7 @@
 package cl.bci.user.mapper;
 
 import cl.bci.user.entity.Phone;
+import cl.bci.user.entity.User;
 import cl.bci.user.model.request.PhoneModel;
 
 import java.util.ArrayList;
@@ -12,11 +13,14 @@ public class PhoneMapper {
 
         List<Phone> phoneEntityList = new ArrayList<>();
 
+        User userEntity = User.builder().uuid(uuid).build();
+
         phoneRequestList.forEach(phone -> {
             phoneEntityList.add(Phone.builder()
                     .number(phone.getNumber())
                     .cityCode(phone.getCityCode())
                     .countryCode(phone.getCountryCode())
+                    .user(userEntity)
                     .build());
         });
 
