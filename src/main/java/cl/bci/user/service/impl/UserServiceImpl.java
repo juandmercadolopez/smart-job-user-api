@@ -25,7 +25,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createOrUpdateUser(UserModel user) {
         User userEntity = userRepository.save(mapUserRequestToUserEntity(user));
-        phoneRepository.saveAll(mapPhoneRequestToPhoneEntity(user.getPhones(), userEntity.getUuid()));
         return userEntity;
     }
 

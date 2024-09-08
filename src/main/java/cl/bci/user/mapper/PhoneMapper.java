@@ -18,7 +18,6 @@ public class PhoneMapper {
                     .number(phone.getNumber())
                     .cityCode(phone.getCityCode())
                     .countryCode(phone.getCountryCode())
-                    .user(User.builder().uuid(uuid).build())
                     .build());
         });
 
