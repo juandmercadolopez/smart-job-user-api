@@ -4,7 +4,6 @@ import cl.bci.user.entity.User;
 import cl.bci.user.model.request.UserModel;
 import cl.bci.user.model.response.InfoResponse;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 import static cl.bci.user.mapper.PhoneMapper.mapPhoneRequestToPhoneEntity;
@@ -38,12 +37,12 @@ public class UserMapper {
 
     }
 
-    public static InfoResponse getInfoResponse(User userEntity){
+    public static InfoResponse getInfoResponse(User userEntity) {
         return InfoResponse.builder()
                 .id(userEntity.getUuid())
-                .created(userEntity.getCreated())
-                .modified("modified")
-                .lastLogin(userEntity.getLastLogin())
+                .created(userEntity.getCreated() == null ? "" : userEntity.getCreated())
+                .modified(userEntity.getModified() == null ? "" : userEntity.getModified())
+                .lastLogin(userEntity.getLastLogin() == null ? "" : userEntity.getLastLogin())
                 .token("token")
                 .isActive(userEntity.getIsActive()).build();
     }

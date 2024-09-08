@@ -1,10 +1,10 @@
 package cl.bci.user.service;
 
-import cl.bci.user.entity.User;
 import cl.bci.user.model.request.UserModel;
+import cl.bci.user.model.response.InfoResponse;
 
 public interface UserService {
 
-    User createOrUpdateUser(UserModel user);
+    InfoResponse createUser(UserModel user);
 
 }

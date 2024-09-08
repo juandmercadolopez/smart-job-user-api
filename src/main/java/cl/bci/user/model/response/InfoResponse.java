@@ -1,11 +1,8 @@
 package cl.bci.user.model.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Setter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

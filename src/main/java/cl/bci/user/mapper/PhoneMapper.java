@@ -1,7 +1,6 @@
 package cl.bci.user.mapper;
 
 import cl.bci.user.entity.Phone;
-import cl.bci.user.entity.User;
 import cl.bci.user.model.request.PhoneModel;
 
 import java.util.ArrayList;

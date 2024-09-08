@@ -25,7 +25,7 @@ public class User {
     @Column(nullable = false)
     private String password;
     @Column(nullable = false)
-    @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Phone> phones;
     private String created;
     private String modified;
