@@ -1,0 +1,2 @@
+user.email.regex: "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-zA-Z]{2,})$"
+user.phone.regex: "\\d+"
