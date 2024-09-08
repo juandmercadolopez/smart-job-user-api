@@ -23,4 +23,17 @@ public class PhoneMapper {
         return phoneEntityList;
     }
 
+    public static List<PhoneModel> mapPhoneEntityToPhoneModel(List<Phone> phoneEntityList) {
+        List<PhoneModel> phoneModelList = new ArrayList<>();
+        phoneEntityList.forEach(phone -> {
+            phoneModelList.add(PhoneModel.builder()
+                    .number(phone.getNumber())
+                    .cityCode(phone.getCityCode())
+                    .countryCode(phone.getCountryCode())
+                    .build());
+        });
+        return phoneModelList;
+    }
+
+
 }

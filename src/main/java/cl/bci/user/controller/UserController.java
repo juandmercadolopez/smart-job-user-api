@@ -1,6 +1,5 @@
 package cl.bci.user.controller;
 
-import cl.bci.user.entity.User;
 import cl.bci.user.model.request.UserModel;
 import cl.bci.user.model.response.InfoResponse;
 import cl.bci.user.service.UserService;
@@ -10,9 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -21,11 +20,33 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    private ResponseEntity<InfoResponse> createUser(@Valid @RequestBody UserModel user) {
+    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    private ResponseEntity<InfoResponse> create(@Valid @RequestBody UserModel user) {
 
         return new ResponseEntity(userService.createUser(user), HttpStatus.CREATED);
 
     }
+
+    @PutMapping(value = "/update/{uuid}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    private ResponseEntity<InfoResponse> update(@Valid @RequestBody UserModel user) {
+        return null;
+    }
+
+    @GetMapping(value = "getById/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
+    private ResponseEntity<UserModel> getById(@PathVariable String uuid) {
+        return new ResponseEntity<>(userService.getUserById(uuid), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/getAll", produces = MediaType.APPLICATION_JSON_VALUE)
+    private ResponseEntity<List<UserModel>> getAll() {
+        return new ResponseEntity(userService.getAllUsers(), HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/delete/{uuid}")
+    private ResponseEntity<Void> delete(@PathVariable String uuid) {
+        userService.deleteUser(uuid);
+        return ResponseEntity.ok().build();
+    }
+
 
 }

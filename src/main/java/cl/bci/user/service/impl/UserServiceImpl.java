@@ -9,8 +9,9 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static cl.bci.user.mapper.UserMapper.getInfoResponse;
-import static cl.bci.user.mapper.UserMapper.mapUserRequestToUserEntity;
+import java.util.List;
+
+import static cl.bci.user.mapper.UserMapper.*;
 
 @Service
 @Transactional
@@ -22,6 +23,22 @@ public class UserServiceImpl implements UserService {
     public InfoResponse createUser(UserModel user) {
         User userEntity = userRepository.save(mapUserRequestToUserEntity(user));
         return getInfoResponse(userEntity);
+    }
+
+    @Override
+    public List<UserModel> getAllUsers() {
+        List<User> userList = userRepository.findAll();
+        return mapUserEntityListToUserModelList(userList);
+    }
+
+    @Override
+    public void deleteUser(String uuid) {
+        userRepository.deleteByUuid(uuid);
+    }
+
+    @Override
+    public UserModel getUserById(String uuid) {
+        return mapUserEntityToUserModel(userRepository.findByUuid(uuid));
     }
 
 }
