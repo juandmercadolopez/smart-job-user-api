@@ -9,6 +9,8 @@ public interface UserService {
 
     InfoResponse createUser(UserModel user);
 
+    InfoResponse updateUser(UserModel user);
+
     List<UserModel> getAllUsers();
 
     void deleteUser(String uuid);

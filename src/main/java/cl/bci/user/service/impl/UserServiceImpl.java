@@ -5,12 +5,14 @@ import cl.bci.user.model.request.UserModel;
 import cl.bci.user.model.response.InfoResponse;
 import cl.bci.user.repository.UserRepository;
 import cl.bci.user.service.UserService;
-import jakarta.transaction.Transactional;
+import cl.bci.user.util.Utils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
+import static cl.bci.user.mapper.PhoneMapper.mapPhoneRequestToPhoneEntity;
 import static cl.bci.user.mapper.UserMapper.*;
 
 @Service
@@ -22,6 +24,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public InfoResponse createUser(UserModel user) {
         User userEntity = userRepository.save(mapUserRequestToUserEntity(user));
+        return getInfoResponse(userEntity);
+    }
+
+    @Override
+    public InfoResponse updateUser(UserModel user) {
+        User userEntity = userRepository.findByUuid(user.getUuid());
+        userEntity.setName(user.getName());
+        userEntity.setEmail(user.getEmail());
+        userEntity.setPassword(user.getPassword());
+        userEntity.setPhones(mapPhoneRequestToPhoneEntity(user.getPhones(), user.getUuid()));
+        userEntity.setIsActive(user.isActive());
+        userEntity.setModified(Utils.getDate());
+        userRepository.save(userEntity);
         return getInfoResponse(userEntity);
     }
 

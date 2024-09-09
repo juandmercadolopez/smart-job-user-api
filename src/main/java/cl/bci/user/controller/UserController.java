@@ -3,7 +3,6 @@ package cl.bci.user.controller;
 import cl.bci.user.model.request.UserModel;
 import cl.bci.user.model.response.InfoResponse;
 import cl.bci.user.service.UserService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -27,9 +27,11 @@ public class UserController {
 
     }
 
-    @PutMapping(value = "/update/{uuid}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<InfoResponse> update(@Valid @RequestBody UserModel user) {
-        return null;
+
+        return new ResponseEntity(userService.updateUser(user), HttpStatus.OK);
+
     }
 
     @GetMapping(value = "getById/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
