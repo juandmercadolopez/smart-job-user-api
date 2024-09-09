@@ -1,7 +1,6 @@
 package cl.bci.user.repository;
 
 import cl.bci.user.entity.User;
-import cl.bci.user.model.request.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
