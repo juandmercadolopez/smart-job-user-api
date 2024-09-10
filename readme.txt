@@ -16,9 +16,10 @@ uso https://editor.swagger.io/ para generar el archivo swagger.yml. Asi mismo si
 a el link y pegar el contenido de swagger.yml en el editor de swagger.
 
 En cuanto a los mensajes de error, segun las indicaciones se debe devolver un json con la propiedad mensaje. En mi caso hago la aclaracion,
-que la propiedad la puse como "messsage" para mantener homogeneidad en el codigo y buenas practicas.
+que la propiedad la puse como "messsage" para mantener homogeneidad en el codigo y buenas practicas. Asi mismo en el controller advise
+se creo una captura de multiples errores, por lo que esa propiedad cuando se retorna, se retonrna como messages, ya que es una lista de varios mensajes.
 
-Por ultimo, en las indicaciones del proyecto se solicita que se cree una validacion para correo eelctronico y que sea configurable. La expresion regular
+Por ultimo, en las indicaciones del proyecto se solicita que se cree una validacion para correo electronico y que sea configurable. La expresion regular
 en el archivo application.yml indica que arranque en este camino pero al final decidi seguir utilizando las mismas validaciones que se usan del framework
 para no reinventar la rueda y cambiar el estilo de codigo o la forma de trabajar. En este caso se uso la anotacion @Email de spring boot para validar
 el correo electronico.
