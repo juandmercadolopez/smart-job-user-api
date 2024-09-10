@@ -1,6 +1,7 @@
 package cl.bci.user.service.impl;
 
 import cl.bci.user.entity.User;
+import cl.bci.user.exception.UserNotFoundException;
 import cl.bci.user.model.request.UserModel;
 import cl.bci.user.model.response.InfoResponse;
 import cl.bci.user.repository.UserRepository;
@@ -12,7 +13,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 
+import static cl.bci.user.constant.MessageConstant.USER_NOT_FOUND;
 import static cl.bci.user.mapper.PhoneMapper.mapPhoneRequestToPhoneEntity;
 import static cl.bci.user.mapper.UserMapper.*;
 
@@ -32,6 +35,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public InfoResponse updateUser(UserModel user) {
         User userEntity = userRepository.findByUuid(user.getUuid());
+
+        if (Objects.isNull(userEntity)) {
+            throw new UserNotFoundException(USER_NOT_FOUND);
+        }
+
         userEntity.setName(user.getName());
         userEntity.setEmail(user.getEmail());
         userEntity.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
@@ -55,7 +63,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserModel getUserById(String uuid) {
-        return mapUserEntityToUserModel(userRepository.findByUuid(uuid));
+        User userEntity = userRepository.findByUuid(uuid);
+
+        if (Objects.isNull(userEntity)) {
+            throw new UserNotFoundException(USER_NOT_FOUND);
+        }
+
+        return mapUserEntityToUserModel(userEntity);
     }
 
 }

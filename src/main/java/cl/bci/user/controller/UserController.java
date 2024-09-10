@@ -1,6 +1,7 @@
 package cl.bci.user.controller;
 
 import cl.bci.user.exception.InvalidArgumentException;
+import cl.bci.user.exception.UserNotFoundException;
 import cl.bci.user.model.request.UserModel;
 import cl.bci.user.model.response.ErrorResponse;
 import cl.bci.user.model.response.InfoResponse;
@@ -27,7 +28,7 @@ public class UserController {
 
         try {
             return new ResponseEntity(userService.createUser(user), HttpStatus.CREATED);
-        }catch (InvalidArgumentException e) {
+        } catch (InvalidArgumentException e) {
             return new ResponseEntity(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
 
@@ -35,15 +36,21 @@ public class UserController {
 
     @PutMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<InfoResponse> update(@Valid @RequestBody UserModel user) {
-
-        return new ResponseEntity(userService.updateUser(user), HttpStatus.OK);
+        try {
+            return new ResponseEntity(userService.updateUser(user), HttpStatus.OK);
+        } catch (UserNotFoundException e) {
+            return new ResponseEntity(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+        }
 
     }
 
     @GetMapping(value = "/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<UserModel> getById(@PathVariable String uuid) {
-
-        return new ResponseEntity<>(userService.getUserById(uuid), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(userService.getUserById(uuid), HttpStatus.OK);
+        } catch (UserNotFoundException e) {
+            return new ResponseEntity(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+        }
 
     }
 
