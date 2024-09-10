@@ -24,6 +24,8 @@ en el archivo application.yml indica que arranque en este camino pero al final d
 para no reinventar la rueda y cambiar el estilo de codigo o la forma de trabajar. En este caso se uso la anotacion @Email de spring boot para validar
 el correo electronico.
 
+El unico endpoint habilitado sin seguridad es el de health check /health. Para chequear que el servicio se encuentra arriba y funcionando.
+
 ########## Pasos para levantar el proyecto ##########
 
 Importar el proyecto en un IDE como eclipse o IntelliJ. Despues de que haya sincronizado y descargadas las depedencias solo es darle Run a la clase principal
