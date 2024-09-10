@@ -26,6 +26,8 @@ el correo electronico.
 
 El unico endpoint habilitado sin seguridad es el de health check /health. Para chequear que el servicio se encuentra arriba y funcionando.
 
+La rama donde se realizo todo el proceso de desarrollo fue en develop. La rama main solo se usa para mostrar el resultado final de la prueba.
+
 ########## Pasos para levantar el proyecto ##########
 
 Importar el proyecto en un IDE como eclipse o IntelliJ. Despues de que haya sincronizado y descargadas las depedencias solo es darle Run a la clase principal
