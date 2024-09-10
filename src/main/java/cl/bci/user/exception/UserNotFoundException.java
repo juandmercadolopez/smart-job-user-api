@@ -1,10 +1,11 @@
 package cl.bci.user.exception;
 
-public class InvalidArgumentException extends RuntimeException {
+public class UserNotFoundException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-    public InvalidArgumentException(String message) {
+    public UserNotFoundException(String message) {
         super(message);
     }
+
 }

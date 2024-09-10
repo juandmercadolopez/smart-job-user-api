@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -22,6 +23,7 @@ public class UserModel {
     private String name;
     @NotNull(message = "the email is required")
     @NotEmpty(message = "email cannot be empty")
+    @Email(message = "The email is not valid")
     private String email;
     @NotNull(message = "A password is required")
     @NotEmpty(message = "The password cannot be empty")

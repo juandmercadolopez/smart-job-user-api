@@ -1,12 +1,14 @@
 package cl.bci.user.mapper;
 
 import cl.bci.user.entity.User;
+import cl.bci.user.exception.InvalidArgumentException;
 import cl.bci.user.model.request.UserModel;
 import cl.bci.user.model.response.InfoResponse;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static cl.bci.user.mapper.PhoneMapper.mapPhoneEntityToPhoneModel;
 import static cl.bci.user.mapper.PhoneMapper.mapPhoneRequestToPhoneEntity;
@@ -17,6 +19,10 @@ import static cl.bci.user.util.Utils.getDate;
 public class UserMapper {
 
     public static User mapUserRequestToUserEntity(UserModel user) {
+
+        if (Objects.nonNull(user.getUuid())) {
+            throw new InvalidArgumentException("El campo uuid no es permitido al crear un usuario");
+        }
 
         User userEntity = User.builder()
                 .name(user.getName())
