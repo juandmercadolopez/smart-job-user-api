@@ -28,7 +28,15 @@ El unico endpoint habilitado sin seguridad es el de health check /health. Para c
 
 La rama en git para todo el desarrollo es develop.
 
-########## Pasos para levantar el proyecto ##########
+Para tener en cuenta. Notese que en la clase MessageConstant tenemos definido una variable con la forma "private static final String". Vale la pena aclarar que esto no se iso de esta manera
+para la clase RegexConstant porque en la prueba pedian que fueran configurables, si se usaba el final, no pemritia llamar valores de las propiedades sino que tocaba
+inicializarlo. Se hace el comentario para aclarar que se ha intentado mantener las buenas practicas de codigo. De todos modos, como lo mencione anteriormente,
+esto se dejo como referencia para que vieran que se intento tomar ese camino pero como aclare anteriormente, me parecio mejor usar las anotaciones de springboot para validar
+el mail en los request que van entrando.
+
+############################################################################################
+############################ Pasos para levantar el proyecto #################################
+############################################################################################
 
 Importar el proyecto en un IDE como eclipse o IntelliJ. Despues de que haya sincronizado y descargadas las depedencias solo es darle Run a la clase principal
 UserAplication.java
