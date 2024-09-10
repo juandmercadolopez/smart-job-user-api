@@ -31,6 +31,7 @@ public class User {
     private String created;
     private String modified;
     private String lastLogin;
+    private String token;
     @Column(nullable = false)
     private Boolean isActive;
 

@@ -3,13 +3,14 @@ package cl.bci.user.mapper;
 import cl.bci.user.entity.User;
 import cl.bci.user.model.request.UserModel;
 import cl.bci.user.model.response.InfoResponse;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static cl.bci.user.mapper.PhoneMapper.mapPhoneEntityToPhoneModel;
 import static cl.bci.user.mapper.PhoneMapper.mapPhoneRequestToPhoneEntity;
+import static cl.bci.user.util.TokenUtil.generateToken;
 import static cl.bci.user.util.Utils.generateUUID;
 import static cl.bci.user.util.Utils.getDate;
 
@@ -20,21 +21,15 @@ public class UserMapper {
         User userEntity = User.builder()
                 .name(user.getName())
                 .email(user.getEmail())
-                .password(user.getPassword())
-                .isActive(user.isActive())
+                .password(new BCryptPasswordEncoder().encode(user.getPassword()))
+                .isActive(user.isActive()).uuid(generateUUID())
+                .created(getDate())
+                .modified("")
+                .lastLogin(getDate())
+                .token(generateToken(user.getEmail(), user.getName()))
                 .build();
 
-        if (Objects.isNull(user.getUuid())) {
-            userEntity.setUuid(generateUUID());
-            userEntity.setCreated(getDate());
-            userEntity.setLastLogin(getDate());
-        } else {
-            userEntity.setModified(getDate());
-            userEntity.setUuid(user.getUuid());
-        }
-
         userEntity.setPhones(mapPhoneRequestToPhoneEntity(user.getPhones(), userEntity.getUuid()));
-
 
         return userEntity;
 
@@ -46,7 +41,7 @@ public class UserMapper {
                 .created(userEntity.getCreated() == null ? "" : userEntity.getCreated())
                 .modified(userEntity.getModified() == null ? "" : userEntity.getModified())
                 .lastLogin(userEntity.getLastLogin() == null ? "" : userEntity.getLastLogin())
-                .token("token")
+                .token(userEntity.getToken())
                 .isActive(userEntity.getIsActive()).build();
     }
 

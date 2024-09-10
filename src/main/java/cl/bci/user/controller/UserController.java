@@ -20,23 +20,25 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<InfoResponse> create(@Valid @RequestBody UserModel user) {
 
         return new ResponseEntity(userService.createUser(user), HttpStatus.CREATED);
 
     }
 
-    @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<InfoResponse> update(@Valid @RequestBody UserModel user) {
 
         return new ResponseEntity(userService.updateUser(user), HttpStatus.OK);
 
     }
 
-    @GetMapping(value = "getById/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<UserModel> getById(@PathVariable String uuid) {
+
         return new ResponseEntity<>(userService.getUserById(uuid), HttpStatus.OK);
+
     }
 
     @GetMapping(value = "/getAll", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -44,7 +46,7 @@ public class UserController {
         return new ResponseEntity(userService.getAllUsers(), HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/delete/{uuid}")
+    @DeleteMapping(value = "/{uuid}")
     private ResponseEntity<Void> delete(@PathVariable String uuid) {
         userService.deleteUser(uuid);
         return ResponseEntity.ok().build();
