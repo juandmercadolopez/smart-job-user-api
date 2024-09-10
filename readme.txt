@@ -26,7 +26,7 @@ el correo electronico.
 
 El unico endpoint habilitado sin seguridad es el de health check /health. Para chequear que el servicio se encuentra arriba y funcionando.
 
-La rama donde se realizo todo el proceso de desarrollo fue en develop. La rama main solo se usa para mostrar el resultado final de la prueba.
+La rama en git para todo el desarrollo es develop.
 
 ########## Pasos para levantar el proyecto ##########
 
