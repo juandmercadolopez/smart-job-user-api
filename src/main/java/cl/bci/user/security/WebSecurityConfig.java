@@ -24,7 +24,7 @@ public class WebSecurityConfig {
 
         return http
                 .csrf().disable()
-                .authorizeRequests()
+                .authorizeRequests().antMatchers("/health").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
